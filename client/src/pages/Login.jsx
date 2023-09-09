@@ -41,51 +41,51 @@ const Login = (props) => {
   };
 
   return (
-<div class="container">
-        <header class="pure-g">
-            <div class="pure-u-2-3">
+<div className="container">
+        <header className="pure-g">
+            <div className="pure-u-2-3">
                 <h1>HAIKU HELPER</h1>
             </div>
-            <nav class="pure-u-1-3">
+            <nav className="pure-u-1-3">
                 <ul>
                     <li><a href="#">HOME</a></li>
                     <li><a href="#">SIGN-UP/LOGIN</a></li>
                 </ul>
             </nav>
         </header>
-        <main class="pure-g">
-            <div class="pure-u-1-2 login">
+        <main className="pure-g">
+            <div className="pure-u-1-2 login">
             </div>
-            <div class="pure-u-1-5">
+            <div className="pure-u-1-5">
                 <form>
                     <h2>LOGIN</h2>
                     <div>
-                        <label for="username">Username:</label><br>
-                        <input type="text" id="username" name="username" required>
+                        <label htmlFor="username">Username:</label><br />
+                        <input type="text" id="username" name="username" value={formState.username} onChange={handleChange} required />
                     </div>
                     <div>
-                        <label for="password">Password:</label><br>
-                        <input type="password" id="password" name="password" required>
+                        <label htmlFor="password">Password:</label><br />
+                        <input type="password" id="password" name="password" value={formState.password} onChange={handleChange} required />
                     </div>
                     <div>
                         <button type="submit">LOGIN</button>
                     </div>
                 </form>
             </div>
-            <div class="pure-u-1-5 sign">
+            <div className="pure-u-1-5 sign">
                 <form>
                     <h2>SIGN-UP</h2>
                     <div>
-                        <label for="username">Username:</label><br>
-                        <input type="text" id="username" name="username" required>
+                        <label htmlFor="username">Username:</label><br />
+                        <input type="text" id="username" name="username" required />
                     </div>
                     <div>
-                        <label for="username">Email:</label><br>
-                        <input type="email" id="email" name="email" required>
+                        <label htmlFor="username">Email:</label><br>
+                        <input type="email" id="email" name="email" required />
                     </div>
                     <div>
-                        <label for="password">Password:</label><br>
-                        <input type="password" id="password" name="password" required>
+                        <label htmlFor="password">Password:</label><br>
+                        <input type="password" id="password" name="password" required />
                     </div>
                     <div>
                         <button type="submit">SIGN-UP</button>
