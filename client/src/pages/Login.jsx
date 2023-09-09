@@ -1,5 +1,48 @@
-<div class="container"><!--parent container to rule them all-->
-        <header class="pure-g"><!--header section-->
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+import { LOGIN_USER } from '../utils/mutations';
+
+import Auth from '../utils/auth';
+
+const Login = (props) => {
+  const [formState, setFormState] = useState({ email: '', password: '' });
+  const [login, { error, data }] = useMutation(LOGIN_USER);
+
+  // update state based on form input changes
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
+
+  // submit form
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    console.log(formState);
+    try {
+      const { data } = await login({
+        variables: { ...formState },
+      });
+
+      Auth.login(data.login.token);
+    } catch (e) {
+      console.error(e);
+    }
+
+    // clear form values
+    setFormState({
+      email: '',
+      password: '',
+    });
+  };
+
+  return (
+<div class="container">
+        <header class="pure-g">
             <div class="pure-u-2-3">
                 <h1>HAIKU HELPER</h1>
             </div>
@@ -7,12 +50,10 @@
                 <ul>
                     <li><a href="#">HOME</a></li>
                     <li><a href="#">SIGN-UP/LOGIN</a></li>
-                    <!--li><a href="#">PROFILE</a></li -->
                 </ul>
-                <!-- a href="#"><span class="creator">CREATE HAIKU</span></a -->
             </nav>
-        </header><!--end header section-->
-        <main class="pure-g"><!--main section for haiku and introductory content-->
+        </header>
+        <main class="pure-g">
             <div class="pure-u-1-2 login">
             </div>
             <div class="pure-u-1-5">
@@ -51,5 +92,9 @@
                     </div>
                 </form>
             </div>
-        </main><!--end main section-->
-    </div> <!--closes container--></br>
+        </main>
+    </div>
+    );
+};
+
+export default Login;
