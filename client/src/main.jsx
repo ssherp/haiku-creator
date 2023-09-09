@@ -11,8 +11,30 @@ import Home from './Homepage.jsx'
 import Login from './Login.jsx'
 import Profile from './Profile.jsx'
 
+// create router
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <App />,
+    error: <Error />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      }, {
+        path: '/login',
+        element: <Login />,
+      }, {
+        path: '/profile',
+        element: <Profile />,
+      }, {
+        path: '/creator',
+        element: <Creator />,
+      }
+    ]
+   }
+])
+
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <RouterProvider router={router} />
 )
