@@ -2,19 +2,7 @@ const Home = () => {
   
     return (
     <div className="container">
-        <header className="pure-g">
-            <div className="pure-u-2-3">
-                <h1>HAIKU HELPER</h1>
-            </div>
-            <nav className="pure-u-1-3">
-                <ul>
-                    <li><a href="#">HOME</a></li>
-                    <li><a href="#">SIGN-UP/LOGIN</a></li>
-                    <li><a href="#">PROFILE</a></li>
-                </ul>
-                <a href="#"><span className="creator">CREATE HAIKU</span></a>
-            </nav>
-        </header>
+            <Nav />
         <main className="pure-g">
             <div className="pure-u-2-3">
                 <p className="haiku" id="first_line">Whispers of the wind</p>   
