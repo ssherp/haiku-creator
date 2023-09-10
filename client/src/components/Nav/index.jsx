@@ -6,50 +6,60 @@ function Nav() {
   function showNavigation() {
     if (Auth.loggedIn()) {
       return (
-        <ul className="flex-row">
-          <li className="mx-1">
-            <Link to="/orderHistory">
-              Order History
-            </Link>
-          </li>
-          <li className="mx-1">
-            {/* this is not using the Link component to logout or user and then refresh the application to the start */}
-            <a href="/" onClick={() => Auth.logout()}>
-              Logout
-            </a>
-          </li>
+        <ul>
+            <li>
+                <Link to="/home">
+                HOME
+                </Link>    
+            </li>
+            <li>
+                <Link to="#">
+                LOG OUT
+                </Link>
+            </li>
+            <li>
+                <Link to="/profile">
+                PROFILE
+                </Link>
+            </li>
+            <li>
+                <Link to="/creator">
+                CREATE HAIKU
+                </Link>
+            </li>
         </ul>
       );
     } else {
       return (
-        <ul className="flex-row">
-          <li className="mx-1">
-            <Link to="/signup">
-              Signup
-            </Link>
-          </li>
-          <li className="mx-1">
-            <Link to="/login">
-              Login
-            </Link>
-          </li>
+        <ul>
+            <li>
+                <Link to="/home">
+                HOME
+                </Link>    
+            </li>
+            <li>
+                <Link to="/login">
+                LOGIN/SIGN-UP
+                </Link>
+            </li>
+            <a href="#"><span className="creator">CREATE HAIKU</span></a>
         </ul>
       );
     }
   }
 
   return (
-    <header className="flex-row px-1">
-      <h1>
-        <Link to="/">
-          <span role="img" aria-label="shopping bag">🛍️</span>
-          -Shop-Shop
-        </Link>
-      </h1>
-
-      <nav>
-        {showNavigation()}
-      </nav>
+    <header className="pure-g">
+        <div className="pure-u-2-3">
+            <h1>
+                <Link to="/">
+                HAIKU HELPER
+                </Link>
+            </h1>
+        </div>
+        <nav className="pure-u-1-3">
+            {showNavigation()}
+        </nav>
     </header>
   );
 }
