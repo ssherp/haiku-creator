@@ -62,12 +62,17 @@ main {
   border-bottom: 2px solid black;
 }
 .haiku {
+  padding-left:5px;
   font-size:30px;
+  color:white;
+  background-size: cover;
+  background-position: center;
+  background-image: url(../public/images/haiku-bg-fade.png);
 }
   /* end main content styles */
 
 .unsplash {
-  background-image: url(../images/zurich1.jpg);
+  background-image: url(../public/images/zurich1.jpg);
   background-position: center;
   min-height: 450px;
   margin-top: 25px;
@@ -81,7 +86,7 @@ main {
 /* NOTE: form button styles shared with creator class above */
 
 .login  {
-  background-image: url(../images/zurich1.jpg);
+  background-image: url(../public/images/zurich1.jpg);
   background-position: center;
   min-height: 450px;
   margin-top: 5px;
@@ -117,7 +122,7 @@ form label {
 }
 .card {
 background-color: black;
-background-image: url(../images/albulena-panduri-nedseTcNTu8-unsplash.jpg);
+background-image: url(../public/images/albulena-panduri-nedseTcNTu8-unsplash.jpg);
 background-blend-mode:screen;
 color:white;
 text-align: center;
@@ -169,7 +174,7 @@ margin:5px;
   }
 
 .inspire {
-  background-image: url(../images/albulena-panduri-nedseTcNTu8-unsplash.jpg);
+  background-image: url(../public/images/albulena-panduri-nedseTcNTu8-unsplash.jpg);
   background-position: center;
   min-height: 450px;
   }
