@@ -1,16 +1,5 @@
 <div class="container"><!--parent container to rule them all-->
-<header class="pure-g"><!--header section-->
-    <div class="pure-u-2-3">
-        <h1>HAIKU HELPER</h1>
-    </div>
-    <nav class="pure-u-1-3">
-        <ul>
-            <li><a href="#">HOME</a></li>
-            <li><a href="#">SIGN-UP/LOGIN</a></li>
-            <li><a href="#">PROFILE</a></li>
-        </ul>
-    </nav>
-</header>
+    <Nav />
 <main class="pure-g">
     <div class="pure-u-2-3">
         <p class="haiku" id="first_line">Whispers of the wind</p>   
