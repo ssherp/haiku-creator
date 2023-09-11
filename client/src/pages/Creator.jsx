@@ -9,7 +9,6 @@
             <li><a href="#">SIGN-UP/LOGIN</a></li>
             <li><a href="#">PROFILE</a></li>
         </ul>
-        <a href="#"><span class="creator">CREATE HAIKU</span></a>
     </nav>
 </header>
 <main class="pure-g">
@@ -18,7 +17,7 @@
         <p class="haiku" id="second_line">Leaves dancing in golden light,</p>
         <p class="haiku" id="third_line">Nature's song begins</p> 
     </div>
-    <div class="pure-u-1-3">
+    <div class="pure-u-1-3"><!--move the save haiku button out of the nav and into this div>
         <a href="#"><span className="creator">CREATE HAIKU</span></a>
     </div>
 </main>
