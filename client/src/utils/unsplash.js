@@ -26,7 +26,7 @@ function unsplash() {
       });
   }
 
-unsplash();
+// unsplash();
 
 // export for use
 export default unsplash;
