@@ -1,7 +1,7 @@
 * {
   margin: 0;
-  scroll-behavior: smooth;
-  transition: all 0.2s ease-in;
+  /* scroll-behavior: smooth;
+  transition: all 0.2s ease-in; */
 }
 *, *::before, *::after {
   box-sizing: border-box;
@@ -76,7 +76,7 @@ main {
   /* end main content styles */
 
 .unsplash {
-  background-image: url(../public/images/zurich1.jpg);
+  /* background-image: url(../public/images/zurich1.jpg); */
   background-position: center;
   min-height: 450px;
   margin-top: 25px;

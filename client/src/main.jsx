@@ -1,15 +1,16 @@
 // import needed modules/components for react, react-dom, react-router-dom, and index.css
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom/dist'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
 
 // import components
 import App from './App.jsx'
-import Creator from './Creator.jsx'
-import Home from './Homepage.jsx'
-import Login from './Login.jsx'
-import Profile from './Profile.jsx'
+import Creator from './pages/Creator.jsx'
+import Homepage from './pages/Homepage.jsx'
+import Login from './pages/Login.jsx'
+import Profile from './pages/Profile.jsx'
+import Results from './pages/Results.jsx'
 
 // create router
 const router = createBrowserRouter([
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />,
+        element: <Homepage />,
       }, {
         path: '/login',
         element: <Login />,
@@ -30,6 +31,9 @@ const router = createBrowserRouter([
       }, {
         path: '/creator',
         element: <Creator />,
+      }, {
+        path: '/results',
+        element: <Results />,
       }
     ]
    }
