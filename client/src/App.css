@@ -78,6 +78,7 @@ main {
 .unsplash {
   /* background-image: url(../public/images/zurich1.jpg); */
   background-position: center;
+  background-size: cover;
   min-height: 450px;
   margin-top: 25px;
   border:2px solid black;
@@ -90,7 +91,7 @@ main {
 /* NOTE: form button styles shared with creator class above */
 
 .login  {
-  background-image: url(../public/images/zurich1.jpg);
+  /* background-image: url(../public/images/zurich1.jpg); */
   background-position: center;
   min-height: 450px;
   margin-top: 5px;

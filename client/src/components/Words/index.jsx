@@ -53,7 +53,7 @@ function WordDeck() {
             on</p>
         </div>
       </div>
-      <div className="pure-u-1-3 inspire"></div>
+      <div className="pure-u-1-3 inspire" id="haikuPicture"></div>
     </aside>
   );
 }

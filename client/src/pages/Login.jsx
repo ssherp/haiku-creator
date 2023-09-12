@@ -4,20 +4,22 @@ import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 import Nav from "../components/Nav";
 import Auth from '../utils/auth';
+import unsplash from '../utils/unsplash';
 
 const Login = (props) => {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error, data }] = useMutation(LOGIN_USER);
-
+  
   // update state based on form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
-
+    
     setFormState({
       ...formState,
       [name]: value,
     });
   };
+  unsplash()
 
   // submit form
   const handleFormSubmit = async (event) => {
@@ -44,7 +46,7 @@ const Login = (props) => {
 <div className="container">
         <Nav />
         <main className="pure-g">
-            <div className="pure-u-1-2 login">
+            <div className="pure-u-1-2 login" id="haikuPicture">
             </div>
             <div className="pure-u-1-5">
                 <form>
