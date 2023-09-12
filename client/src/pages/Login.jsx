@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
-
+import Nav from "../components/Nav";
 import Auth from '../utils/auth';
 
 const Login = (props) => {
@@ -70,11 +70,11 @@ const Login = (props) => {
                         <input type="text" id="username" name="username" required />
                     </div>
                     <div>
-                        <label htmlFor="username">Email:</label><br>
+                        <label htmlFor="username">Email:</label><br />
                         <input type="email" id="email" name="email" required />
                     </div>
                     <div>
-                        <label htmlFor="password">Password:</label><br>
+                        <label htmlFor="password">Password:</label><br />
                         <input type="password" id="password" name="password" required />
                     </div>
                     <div>

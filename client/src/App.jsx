@@ -1,5 +1,5 @@
 // import required modules
-
+import './App.css'
 import { Outlet } from 'react-router-dom';
 import {
   ApolloClient,
