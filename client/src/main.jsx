@@ -6,10 +6,10 @@ import './index.css'
 
 // import components
 import App from './App.jsx'
-import Creator from './Creator.jsx'
-import Home from './Homepage.jsx'
-import Login from './Login.jsx'
-import Profile from './Profile.jsx'
+import Creator from './pages/Creator.jsx'
+import Home from './pages/Homepage.jsx'
+import Login from './pages/Login.jsx'
+import Profile from './pages/Profile.jsx'
 
 // create router
 const router = createBrowserRouter([
@@ -20,7 +20,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />,
+        element: <Homepage />,
       }, {
         path: '/login',
         element: <Login />,
