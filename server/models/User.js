@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 const bcrypt = require('bcrypt');
 
 const userSchema = new Schema({
-  userName: {
+  username: {
     type: String,
     required: true,
     unique: true,
@@ -21,7 +21,7 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
-  Haikus: [{
+  haikus: [{
     type: Schema.Types.ObjectId,
      ref: 'Haiku',
      required: true}]
