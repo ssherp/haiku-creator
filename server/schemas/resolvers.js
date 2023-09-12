@@ -4,7 +4,7 @@ const resolvers = {
     Query: {
       user: async (parent, args, context) => {
         if (context.user) {
-          return User.findOne({ _id: context.user._id });
+          return await User.findOne({ _id: context.user._id });
         }
         throw AuthenticationError;
       },
@@ -33,10 +33,42 @@ const resolvers = {
           return { token, user };
         },
 
+        saveHaiku: async (parent, { haikuText,createdAt,image}, context) => {
+            if (context.user) {
+              return await User.findOneAndUpdate(
+                { _id: context.user._id },
+                {
+                  $addToSet: { savedHaikus: {haikuText,createdAt,image} },
+                },
+                {
+                  new: true,
+                  runValidators: true,
+                }
+              );
+            }
+            throw AuthenticationError;
+          },
 
+          removeHaiku: async (parent, {bookId}, context) => {
+            if (context.user) {
+              return await User.findOneAndUpdate(
+                { _id: context.user._id },
+                {
+                  $pull: { savedBooks: {bookId} },
+                },
+                {
+                  new: true,
+                  runValidators: true,
+                }
+              );
+            }
+            throw AuthenticationError;
+          },
 
-
-        
 }
 
 }
+
+
+
+module.exports = resolvers;
