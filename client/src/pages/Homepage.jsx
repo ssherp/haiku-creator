@@ -2,7 +2,7 @@ import Nav from "../components/Nav";
 import unsplash from "../utils/unsplash";
 
 const Homepage = () => {
-  
+  unsplash()
     return (
     <div className="container">
             <Nav />
