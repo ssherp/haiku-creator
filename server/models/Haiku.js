@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 const { Schema } = mongoose;
 
@@ -17,7 +17,7 @@ const haikuSchema = new Schema({
   }
 });
 
-const Haiku = mongoose.model('Haiku', haikuSchema);
+const Haiku =model('Haiku', haikuSchema);
 
 module.exports = Haiku;
 

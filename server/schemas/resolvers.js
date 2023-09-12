@@ -1,4 +1,4 @@
-const { User} = require('../models');
+const {User} = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 const resolvers = {
     Query: {
@@ -54,7 +54,7 @@ const resolvers = {
               return await User.findOneAndUpdate(
                 { _id: context.user._id },
                 {
-                  $pull: { savedBooks: {bookId} },
+                  $pull: { savedHaikus: {_Id} },
                 },
                 {
                   new: true,
