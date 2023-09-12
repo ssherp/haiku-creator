@@ -1,4 +1,6 @@
-const Home = () => {
+import Nav from "../components/Nav";
+
+const Homepage = () => {
   
     return (
     <div className="container">
@@ -18,4 +20,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default Homepage;
