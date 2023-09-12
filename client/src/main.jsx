@@ -10,6 +10,7 @@ import Creator from './pages/Creator.jsx'
 import Homepage from './pages/Homepage.jsx'
 import Login from './pages/Login.jsx'
 import Profile from './pages/Profile.jsx'
+import Results from './pages/Results.jsx'
 
 // create router
 const router = createBrowserRouter([
@@ -30,6 +31,9 @@ const router = createBrowserRouter([
       }, {
         path: '/creator',
         element: <Creator />,
+      }, {
+        path: '/results',
+        element: <Results />,
       }
     ]
    }
