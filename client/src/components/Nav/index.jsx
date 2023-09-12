@@ -42,7 +42,6 @@ function Nav() {
                 LOGIN/SIGN-UP
                 </Link>
             </li>
-            <a href="#"><span className="creator">CREATE HAIKU</span></a>
         </ul>
       );
     }
