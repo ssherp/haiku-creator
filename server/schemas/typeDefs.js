@@ -16,12 +16,12 @@ createdAt: String
 }
 type Query {
     user:User
+}
 
 type Mutation {
         addUser(username: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!): Auth
-        updateUser(username: String, email: String, password: String): User
-        saveHaiku(haikuText:String,createdAt: String,image: String): User
+        saveHaiku(haikuText:String,createdAt:String,image:String): User
         removeHaiku(_id:ID!):User
       }   
 `;
