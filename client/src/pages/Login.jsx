@@ -44,7 +44,7 @@ const Login = (props) => {
 <div className="container">
         <Nav />
         <main className="pure-g">
-            <div className="pure-u-1-2 login">
+            <div className="pure-u-1-2 login" id="haikuPicture">
             </div>
             <div className="pure-u-1-5">
                 <form>
