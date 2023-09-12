@@ -1,4 +1,6 @@
-const { Schema, model } = require('mongoose');
+const mongoose = require('mongoose');
+
+const { Schema } = mongoose;
 const bcrypt = require('bcrypt');
 
 const userSchema = new Schema({
@@ -19,7 +21,7 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
-  Haikus: [{
+  haikus: [{
     type: Schema.Types.ObjectId,
      ref: 'Haiku',
      required: true}]
