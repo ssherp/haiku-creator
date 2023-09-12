@@ -1,4 +1,5 @@
 import Nav from "../components/Nav";
+import unsplash from "../utils/unsplash";
 
 const Homepage = () => {
   
@@ -15,7 +16,7 @@ const Homepage = () => {
                 <p><b>Haiku Helper:</b> Your Gateway to Poetic Bliss! Unleash your inner poet with ease using our intuitive platform. Craft beautiful haikus effortlessly, guided by our user-friendly drag-n-drop interface. Dive into a world of syllabic harmony and nature-inspired verse. Let your creativity flourish with <b>Haiku Helper</b>! Start composing today.</p>
             </div>
         </main>
-        <aside className="unsplash"></aside>
+        <aside className="unsplash" id="haikuPicture"></aside>
     </div>
     );
 };
