@@ -1,6 +1,3 @@
-// import react 
-import React from 'react'; 
-
 // set up API call to unsplash to generate nature image
 function unsplash() {
     var apiKey = "tOQT-14Jo3wp5-I1CMKVmCdvQXVRihQoi8pJ7AsiPQI";
@@ -18,16 +15,17 @@ function unsplash() {
         var photoUrl = data.urls.regular;
   
         // Create an <img> element and set its source to the random photo URL
-        document.body.setAttribute(
-          "style",
-          "background-image:url(" + photoUrl + ")"
-        );
-      })
-      .catch((error) => {
-        console.error("Error:", error);
+    //     document.getElementById.setAttribute(
+    //       "style",
+    //       "background-image:url(" + photoUrl + ")"
+    //     );
+    //   })
+    var haikuPicture = document.getElementById('haikuPicture');
+    var style = "background-image:url(" + photoUrl + ")";
+    haikuPicture.style.cssText += style;
       });
   }
-  
+
 unsplash();
 
 // export for use

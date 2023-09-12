@@ -8,7 +8,7 @@ function Nav() {
       return (
         <ul>
             <li>
-                <Link to="/home">
+                <Link to="/">
                 HOME
                 </Link>    
             </li>
@@ -33,7 +33,7 @@ function Nav() {
       return (
         <ul>
             <li>
-                <Link to="/home">
+                <Link to="/">
                 HOME
                 </Link>    
             </li>
