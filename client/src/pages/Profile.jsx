@@ -1,5 +1,6 @@
 import { Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
+import unsplash from '../utils/unsplash';
 
 // import { QUERY_USER, QUERY_ME } from '../utils/queries';
 
@@ -8,6 +9,7 @@ import Nav from "../components/Nav";
 import Cards from "../components/Cards";
 
 const Profile = () => {
+  unsplash()
   // const { username: userParam } = useParams();
 
   // const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
@@ -40,6 +42,7 @@ const Profile = () => {
     <div className="container">
         <Nav />
         <Cards />
+        <aside className="unsplash" id="haikuPicture"></aside>
     </div>
   );
 };
