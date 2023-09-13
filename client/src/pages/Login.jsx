@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
 import { LOG_IN, ADD_USER } from '../utils/mutations';
 import Nav from '../components/Nav';
