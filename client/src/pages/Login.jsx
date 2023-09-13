@@ -62,7 +62,9 @@ const Login = () => {
       <Nav />
       <main className="pure-g">
         <div className="pure-u-1-2 login" id="haikuPicture">
-          <form onSubmit={handleFormSubmit}>
+        </div>
+      
+        <form onSubmit={handleFormSubmit}>
             <h2>{isLogin ? 'LOGIN' : 'SIGN-UP'}</h2>
             <div>
               <label htmlFor="username">Username:</label><br />
@@ -93,41 +95,8 @@ const Login = () => {
               </>
             )}
           </p>
-        </div>
-        <div
-          style={{
-            backgroundImage: `url(${unsplashDataLoaded ? unsplash() : ''})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            width: '100%',
-            height: '100%',
-          }}
-        ></div>
-        <div className="pure-u-1-5 sign">
-          {isLogin ? null : (
-            <form onSubmit={handleFormSubmit}>
-              <h2>SIGN-UP</h2>
-              <div>
-                <label htmlFor="username">Username:</label><br />
-                <input type="text" id="username" name="username" required />
-              </div>
-              <div>
-                <label htmlFor="email">Email:</label><br />
-                <input type="email" id="email" name="email" required />
-              </div>
-              <div>
-                <label htmlFor="password">Password:</label><br />
-                <input type="password" id="password" name="password" required />
-              </div>
-              <div>
-                <button type="submit">SIGN-UP</button>
-              </div>
-            </form>
-          )}
-        </div>
       </main>
     </div>
   );
 };
-// dsds
 export default Login;
