@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOG_IN } from '../utils/mutations';
 import Nav from "../components/Nav";
@@ -13,14 +12,14 @@ const Login = (props) => {
   // update state based on form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
-    
+
     setFormState({
       ...formState,
       [name]: value,
     });
   };
   
-  const [unsplashDataLoaded, setUnsplashDataLoaded] = useState(false);
+  const [unsplashDataLoaded] = useState(false);
   useEffect(() => {
     unsplash()
       .then(() => {
@@ -63,7 +62,6 @@ const Login = (props) => {
               backgroundImage: `url(${unsplashDataLoaded ? unsplash() : ''})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
-              width: '100%',
               height: '100%',
             }}
           ></div>
