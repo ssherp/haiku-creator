@@ -50,7 +50,7 @@ class AuthService {
         // clear user token and profile data from localStorage
         localStorage.removeItem('id_token');
         // reload page to homepage
-        window.location.assign('/homepage');
+        window.location.assign('/');
     }
 }
 
