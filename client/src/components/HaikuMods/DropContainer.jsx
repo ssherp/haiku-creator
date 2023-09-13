@@ -14,13 +14,13 @@ const DropContainer = ({ onDrop, children }) => {
   let backgroundColor = 'transparent';
 
   if (isActive) {
-    backgroundColor = 'lightgreen';
+    backgroundColor = 'lightgrey';
   } else if (canDrop) {
-    backgroundColor = 'lightyellow';
+    backgroundColor = 'darkgrey';
   }
 
   return (
-    <div ref={drop} className="drop-container" style={{ backgroundColor }}>
+    <div ref={drop} className="drop-container haiku" style={{ backgroundColor }}>
       {children}
     </div>
   );

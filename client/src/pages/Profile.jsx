@@ -84,42 +84,17 @@ const Profile = () => {
               Email: {user.email}
             </p>
           </div>
-          <div className="user-haikus">
+          {/* <div className="user-haikus">
             <h2> User's Haikus </h2>
             <ul>
               {user.haikus.map((haiku) => (
                 <li key={haiku._id}>{haiku.content}</li>
               ))}
             </ul>
-          </div>      
+          </div>       */}
       </div>
     </main>
       <aside className="unsplash" id="haikuPicture"></aside>
-      <div
-        style={{
-          backgroundImage: `url(${unsplashDataLoaded ? unsplash() : ''})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          height: '100%',
-        }}
-      ></div>
-      <div className="user-profile">
-        <h2>User Profile</h2>
-        <p>
-          Username: {user.username}
-        </p>
-        <p>
-          Email: {user.email}
-        </p>
-      </div>
-      <div className="user-haikus">
-        <h2> User's Haikus </h2>
-        <ul>
-          {user.haikus.map((haiku) => (
-            <li key={haiku._id}>{haiku.content}</li>
-          ))}
-        </ul>
-      </div>
     </div>
   );
 };
