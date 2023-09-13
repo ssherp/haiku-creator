@@ -29,7 +29,7 @@ const mockUser = {
 };
 
   const user = mockUser;
-
+ 
 function HaikuSection() {
   return (
       <ul className="pure-u-2-3 cardDeck">

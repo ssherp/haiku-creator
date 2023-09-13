@@ -17,7 +17,7 @@ const SyllableContainer = ({ title, words, onDrop, updateWords }) => {
 
   return (
     <div className="syllable-container">
-      <h3>{title}</h3>
+      <p>{title}</p>
       <DropContainer onDrop={(item) => onDrop(item)}>
         <div className="syllable-words">{joinedWords}</div>
       </DropContainer>
