@@ -128,21 +128,20 @@ form label {
 }
 .card {
 background-color: black;
-background-image: url(../public/images/albulena-panduri-nedseTcNTu8-unsplash.jpg);
-background-blend-mode:screen;
 color:white;
 text-align: center;
 font-size: 22px;
 padding-top: 10px;
-min-height: 100px;
+height: 65px;
 width: 300px;
 margin:5px;
+transition: all 0.2s ease-in;
 }
 .card:hover {
-  background-color:lightslategray;
+  background-color:rgb(48, 87, 57);
   background-blend-mode: screen;
-  color:black;
-  font-weight: 600;
+  /* color:black; */
+  /* font-weight: 600; */
 }
 
 /* PROFILE PAGE */
