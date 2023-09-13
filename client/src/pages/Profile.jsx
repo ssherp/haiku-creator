@@ -72,7 +72,28 @@ const Profile = () => {
   return (
     <div className="container">
       <Nav />
+      <main className="pure-g">
       <Cards />
+      <div className="pure-u-1-3">
+          <div className="user-profile">
+            <h2>User Profile</h2>
+            <p>
+              Username: {user.username}
+            </p>
+            <p>
+              Email: {user.email}
+            </p>
+          </div>
+          <div className="user-haikus">
+            <h2> User's Haikus </h2>
+            <ul>
+              {user.haikus.map((haiku) => (
+                <li key={haiku._id}>{haiku.content}</li>
+              ))}
+            </ul>
+          </div>      
+      </div>
+    </main>
       <aside className="unsplash" id="haikuPicture"></aside>
       <div
         style={{

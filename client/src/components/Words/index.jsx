@@ -20,13 +20,13 @@ const Word = ({ word, onWordSelect }) => {
 
 const WordDeck = ({ words, onWordSelect }) => {
   return (
-    <aside className="pure-g">
-      <div className="pure-u-2-3 wordDeck">
-        <div className="pure-g">
+    <aside>
+      <div className="wordDeck">
+        <div>
           {words.map((categoryObj, index) => (
-            <div key={index} className="pure-u-1-3"> {/* Each category in its own column */}
+            <div key={index}> {/* Each category in its own column */}
               <h3>{categoryObj.category}</h3>
-              <div className="pure-g">
+              <div>
                 {categoryObj.words.map((word, wordIndex) => (
                   <Word key={wordIndex} word={word} onWordSelect={onWordSelect} />
                 ))}
@@ -35,7 +35,6 @@ const WordDeck = ({ words, onWordSelect }) => {
           ))}
         </div>
       </div>
-      <div className="pure-u-1-3 inspire"></div>
     </aside>
   );
 };

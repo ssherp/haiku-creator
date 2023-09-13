@@ -89,12 +89,13 @@ main {
 /* LOGIN PAGE */
 
 /* NOTE: form button styles shared with creator class above */
-
+.inspire,
 .login  {
   /* background-image: url(../public/images/zurich1.jpg); */
   background-position: center;
   min-height: 450px;
   margin-top: 5px;
+  background-size: cover;
   border:2px solid black;
 }
 
@@ -170,16 +171,16 @@ margin:5px;
   background-blend-mode:screen;
   color:black;
   font-size: 22px;
-  padding-top: 10px;
+  /* padding-top: 10px;
   min-width: 250px;
   min-height: 100px;
-  margin:5px;
+  margin:5px; */
   padding:10px;
   text-align: center;
   }
 
-.inspire {
+/* .inspire {
   background-image: url(../public/images/albulena-panduri-nedseTcNTu8-unsplash.jpg);
   background-position: center;
   min-height: 450px;
-  }
+  } */
