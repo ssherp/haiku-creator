@@ -1,61 +1,45 @@
-import React from 'react';
+import { useDrag } from 'react-dnd';
+import { calculateSyllables } from '../HaikuMods/SyllableContainer'
 
-function WordDeck() {
+const Word = ({ word, onWordSelect }) => {
+  const [, ref] = useDrag({
+    type: 'WORD',
+    item: { word, syllables: calculateSyllables(word) }
+  });
+
   return (
-    <aside className="pure-g">
-      <div className="pure-u-2-3 wordDeck">
+    <div
+      ref={ref}
+      className="pure-u-1-5 words"
+      onClick={() => onWordSelect(word, word.length)} 
+    >
+      {word}
+    </div>
+  );
+};
+
+const WordDeck = ({ words, onWordSelect }) => {
+  return (
+    <aside>
+      <div className="wordDeck">
         <div>
-          <h3>1 syllable</h3>
-          <p className="words">Leaf<br />
-            Stream<br />
-            Sun<br />
-            Tree<br />
-            Sky</p>
-        </div>
-        <div>
-          <h3>2 syllables</h3>
-          <p className="words">Meadow<br />
-            Whisper<br />
-            Pebble<br />
-            Rainbow<br />
-            Blossom</p>
-        </div>
-        <div>
-          <h3>3 syllables</h3>
-          <p className="words">Butterfly<br />
-            Waterfall<br />
-            Firefly<br />
-            Horizon<br />
-            Tranquil</p>
-        </div>
-        <div>
-          <h3>Verbs</h3>
-          <p className="words">Whispers<br />
-            Dances<br />
-            Glistens<br />
-            Sways<br />
-            Blooms</p>
-        </div>
-        <div>
-          <h3>Adjectives</h3>
-          <p className="words">Gentle<br />
-            Tranquil<br />
-            Radiant<br />
-            Fragrant<br />
-            Serene</p>
-        </div>
-        <div>
-          <h3>Prepositions</h3>
-          <p className="words">of<br />
-            in<br />
-            for<br />
-            over<br />
-            on</p>
+          {words.map((categoryObj, index) => (
+            <div key={index}> {/* Each category in its own column */}
+              <h3>{categoryObj.category}</h3>
+              <div>
+                {categoryObj.words.map((word, wordIndex) => (
+                  <Word key={wordIndex} word={word} onWordSelect={onWordSelect} />
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
-      <div className="pure-u-1-3 inspire" id="haikuPicture"></div>
     </aside>
   );
-}
+};
 
 export default WordDeck;
+
+
+
