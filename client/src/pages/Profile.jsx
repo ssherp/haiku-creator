@@ -23,51 +23,51 @@ const Profile = () => {
 
   const { username: userParam } = useParams();
 
- // FOR TESTING PURPOSES PLEASE FORGIVE ME MY SIGNUP AND LOGIN DONT WORK YET GUYS 
- const mockUser = {
-  username: "testuser",
-  email: "testuser@example.com",
-  haikus: [
-    {
-      _id: "1",
-      content: "Haiku 1 Content",
-    },
-    {
-      _id: "2",
-      content: "Haiku 2 Content",
-    },
-  ],
-};
+//  // FOR TESTING PURPOSES PLEASE FORGIVE ME MY SIGNUP AND LOGIN DONT WORK YET GUYS 
+//  const mockUser = {
+//   username: "testuser",
+//   email: "testuser@example.com",
+//   haikus: [
+//     {
+//       _id: "1",
+//       content: "Haiku 1 Content",
+//     },
+//     {
+//       _id: "2",
+//       content: "Haiku 2 Content",
+//     },
+//   ],
+// };
 
-  const user = mockUser;
+  // const user = mockUser;
 
-  // const { loading, data, error } = useQuery(userParam ? USER : USER, { 
-  //   variables: { username: userParam },
-  // });
+  const { loading, data, error } = useQuery(userParam ? USER : USER, { 
+    variables: { username: userParam },
+  });
 
-  // const user = data?.user || {};
+  const user = data?.user || {};
 
-  // if (Auth.loggedIn() && Auth.getProfile().authenticatedPerson.username === userParam) {
-  //   return <Navigate to="/profile" />;
-  // }
+  if (Auth.loggedIn() && Auth.getProfile().authenticatedPerson.username === userParam) {
+    return <Navigate to="/profile" />;
+  }
 
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
-  // if (error) { 
-  //   console.error('Error fetching user data:', error);
-  //   return <div>Error fetching user data.</div>;
-  // }
+  if (error) { 
+    console.error('Error fetching user data:', error);
+    return <div>Error fetching user data.</div>;
+  }
 
-  // if (!user?.username) {
-  //   return (
-  //     <h4>
-  //       You need to be logged in to see this. Use the navigation links above to
-  //       sign up or log in!
-  //     </h4>
-  //   );
-  // }
+  if (!user?.username) {
+    return (
+      <h4>
+        You need to be logged in to see this. Use the navigation links above to
+        sign up or log in!
+      </h4>
+    );
+  }
 
   return (
     <div className="container">

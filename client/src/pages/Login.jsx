@@ -9,8 +9,7 @@ const Login = () => {
   const [formState, setFormState] = useState({ username: '', password: '', email: '' });
   const [login] = useMutation(LOG_IN);
   const [addUser] = useMutation(ADD_USER);
-  const [isLogin, setIsLogin] = useState(true); 
-
+  const [isLogin, setIsLogin] = useState(false);
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -26,17 +25,20 @@ const Login = () => {
     try {
       if (isLogin) {
         const { data } = await login({
-          variables: { ...formState },
+          variables: { username: formState.username, password: formState.password },
         });
-
+        console.log(data)
+        
         Auth.login(data.login.token);
       } else {
         const { data } = await addUser({
           variables: { ...formState },
         });
+        console.log(data)
 
         Auth.login(data.addUser.token);
       }
+      
     } catch (e) {
       console.error(e);
     }
@@ -63,38 +65,37 @@ const Login = () => {
       <main className="pure-g">
         <div className="pure-u-1-2 login" id="haikuPicture">
         </div>
-      
         <form onSubmit={handleFormSubmit}>
-            <h2>{isLogin ? 'LOGIN' : 'SIGN-UP'}</h2>
+          <h2>{isLogin ? 'LOGIN' : 'SIGN-UP'}</h2>
+          <div>
+            <label htmlFor="username">Username:</label><br />
+            <input type="text" id="username" name="username" value={formState.username} onChange={handleChange} required />
+          </div>
+          {isLogin ? null : (
             <div>
-              <label htmlFor="username">Username:</label><br />
-              <input type="text" id="username" name="username" value={formState.username} onChange={handleChange} required />
+              <label htmlFor="email">Email:</label><br />
+              <input type="email" id="email" name="email" value={formState.email} onChange={handleChange} required />
             </div>
-            {isLogin ? null : (
-              <div>
-                <label htmlFor="email">Email:</label><br />
-                <input type="email" id="email" name="email" value={formState.email} onChange={handleChange} required />
-              </div>
-            )}
-            <div>
-              <label htmlFor="password">Password:</label><br />
-              <input type="password" id="password" name="password" value={formState.password} onChange={handleChange} required />
-            </div>
-            <div>
-              <button type="submit">{isLogin ? 'LOGIN' : 'SIGN-UP'}</button>
-            </div>
-          </form>
-          <p>
-            {isLogin ? (
-              <>
-                Don't have an account? <button onClick={() => setIsLogin(false)}>Sign Up</button>
-              </>
-            ) : (
-              <>
-                Already have an account? <button onClick={() => setIsLogin(true)}>Login</button>
-              </>
-            )}
-          </p>
+          )}
+          <div>
+            <label htmlFor="password">Password:</label><br />
+            <input type="password" id="password" name="password" value={formState.password} onChange={handleChange} required />
+          </div>
+          <div>
+            <button type="submit">{isLogin ? 'LOGIN' : 'SIGN-UP'}</button>
+          </div>
+        </form>
+        <p>
+          {isLogin ? (
+            <>
+              Dont have an account? <button onClick={() => setIsLogin(false)}>Sign Up</button>
+            </>
+          ) : (
+            <>
+              Already have an account? <button onClick={() => setIsLogin(true)}>Login</button>
+            </>
+          )}
+        </p>
       </main>
     </div>
   );

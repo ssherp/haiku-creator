@@ -42,7 +42,7 @@ class AuthService {
         // save user token to localStorage
         localStorage.setItem('id_token', idToken);
         // reload page to homepage
-        window.location.assign('/');
+        window.location.assign('/profile');
     }
 
     // clear token from localStorage and force logout with reload
