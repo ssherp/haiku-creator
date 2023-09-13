@@ -7,42 +7,50 @@ function unsplash() {
   
     var requestURL =
       "https://api.unsplash.com/photos/random?query=nature?orientation=landscape&client_id=" +
-      apiKey;
+      apiKey4;
+      
+//       var photoUrl;
+//       fetch(requestURL)
+//         .then((response) => response.json())
+//         .then((data) => {
+//           photoUrl = data.urls.regular;
   
-  //   fetch(requestURL)
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       var photoUrl = data.urls.regular;
-  
-  //   var haikuPicture = document.getElementById('haikuPicture');
-  //   var style = "background-image:url(" + photoUrl + ")";
-  //   haikuPicture.style.cssText += style;
-  //     });
-  // }
+//         // Create an <img> element and set its source to the random photo URL
+//     //     document.getElementById.setAttribute(
+//     //       "style",
+//     //       "background-image:url(" + photoUrl + ")"
+//     //     );
+//     //   })
+//     var haikuPicture = document.getElementById('haikuPicture');
+//     var style = "background-image:url(" + photoUrl + ")";
+//     haikuPicture.style.cssText += style;
+//   });
+// }
+
+// // unsplash();
 
 
-  return new Promise((resolve, reject) => {
-    fetch(requestURL)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then((data) => {
-        var photoUrl = data.urls.regular;
-        resolve(photoUrl); // Resolve the promise with the image URL
-        var haikuPicture = document.getElementById('haikuPicture');
-        var style = "background-image:url(" + photoUrl + ")";
-        haikuPicture.style.cssText += style;
-      })
-      .catch((error) => {
-        console.error('Error loading unsplash data:', error);
-        reject(error); // Reject the promise with the error
-      });
-  });
-  }
-  
+return new Promise((resolve, reject) => {
+  fetch(requestURL)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then((data) => {
+      var photoUrl = data.urls.regular;
+      resolve(photoUrl); 
+      var haikuPicture = document.getElementById('haikuPicture');
+      var style = "background-image:url(" + photoUrl + ")";
+      haikuPicture.style.cssText += style;
+    })
+    .catch((error) => {
+      console.error('Error loading unsplash data:', error);
+      reject(error); 
+    });
+});
+}
 
 // export for use
 export default unsplash;
