@@ -14,19 +14,11 @@ function unsplash() {
       .then((data) => {
         var photoUrl = data.urls.regular;
   
-        // Create an <img> element and set its source to the random photo URL
-    //     document.getElementById.setAttribute(
-    //       "style",
-    //       "background-image:url(" + photoUrl + ")"
-    //     );
-    //   })
     var haikuPicture = document.getElementById('haikuPicture');
     var style = "background-image:url(" + photoUrl + ")";
     haikuPicture.style.cssText += style;
       });
   }
-
-// unsplash();
 
 // export for use
 export default unsplash;
