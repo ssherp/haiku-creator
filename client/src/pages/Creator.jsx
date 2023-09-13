@@ -128,21 +128,9 @@ const handleWordSelect = (word, syllables) => {
 return (
   <DndProvider backend={HTML5Backend}>
     <div className="container">
-      <header>
         <Nav />
-        <Assemble />
-      </header>
-      <div className="pure-u-1-2 login" id="haikuPicture">
-            </div>
-            <div
-            style={{
-              backgroundImage: `url(${unsplashDataLoaded ? unsplash() : ''})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              height: '100%',
-            }}
-          ></div>
-      <div className="pure-u-1">
+        <main className="pure-g">
+        <div className="pure-u-1-3">
         <DropContainer onDrop={(item) => handleWordSelect(item.word, item.syllables)}>
           <SyllableContainer title="Line 1 (5 syllables)" words={syllableContainerWords.line1} />
         </DropContainer>
@@ -152,10 +140,15 @@ return (
         <DropContainer onDrop={(item) => handleWordSelect(item.word, item.syllables)}>
           <SyllableContainer title="Line 3 (5 syllables)" words={syllableContainerWords.line3} />
         </DropContainer>
+        <br />
+        <a href="#"><span className="creator">SAVE HAIKU</span></a>
+
       </div>
-      <div className="pure-u-1">
+      <div className="pure-u-1-3">
         <Words words={initialWords} onWordSelect={handleWordSelect} />
       </div>
+      <aside className="pure-u-1-3 unsplash" id="haikuPicture"></aside>
+    </main>
     </div>
   </DndProvider>
 );
