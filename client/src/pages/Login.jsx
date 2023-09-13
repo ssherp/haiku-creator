@@ -1,14 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-import { LOGIN_USER } from '../utils/mutations';
+import { LOG_IN } from '../utils/mutations';
 import Nav from "../components/Nav";
 import Auth from '../utils/auth';
 import unsplash from '../utils/unsplash';
 
 const Login = (props) => {
   const [formState, setFormState] = useState({ email: '', password: '' });
-  const [login, { error, data }] = useMutation(LOGIN_USER);
+  const [login, { error, data }] = useMutation(LOG_IN);
   
   // update state based on form input changes
   const handleChange = (event) => {
@@ -19,7 +19,17 @@ const Login = (props) => {
       [name]: value,
     });
   };
-  unsplash()
+  
+  const [unsplashDataLoaded, setUnsplashDataLoaded] = useState(false);
+  useEffect(() => {
+    unsplash()
+      .then(() => {
+        // Handle the successful loading of the image if needed
+      })
+      .catch((error) => {
+        console.error('Error loading unsplash data:', error);
+      });
+  }, []);
 
   // submit form
   const handleFormSubmit = async (event) => {
@@ -48,6 +58,15 @@ const Login = (props) => {
         <main className="pure-g">
             <div className="pure-u-1-2 login" id="haikuPicture">
             </div>
+            <div
+            style={{
+              backgroundImage: `url(${unsplashDataLoaded ? unsplash() : ''})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              width: '100%',
+              height: '100%',
+            }}
+          ></div>
             <div className="pure-u-1-5">
                 <form>
                     <h2>LOGIN</h2>
