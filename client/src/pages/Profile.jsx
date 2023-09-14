@@ -2,19 +2,13 @@ import { Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { useState, useEffect } from 'react';
 import unsplash from '../utils/unsplash';
-import { ADD_USER } from '../utils/mutations';
-import { useMutation } from '@apollo/client';
-
 import { USER } from '../utils/queries'; // Import the correct query
-
-import Auth from '../utils/auth';
 import Nav from "../components/Nav";
 import Cards from "../components/Cards";
 
 const Profile = () => {
   const {loading, error, data} = useQuery(USER)
   const { userInfo } = data || {}
-
   const [unsplashDataLoaded] = useState(false);
   useEffect(() => {
 
