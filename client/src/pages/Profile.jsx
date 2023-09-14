@@ -21,7 +21,7 @@ const Profile = () => {
       });
   }, []);
 
-  const { username: userParam } = useParams();
+  // const { username: userParam } = useParams();
 
 //  // FOR TESTING PURPOSES PLEASE FORGIVE ME MY SIGNUP AND LOGIN DONT WORK YET GUYS 
 //  const mockUser = {
@@ -41,13 +41,11 @@ const Profile = () => {
 
   // const user = mockUser;
 
-  const { loading, data, error } = useQuery(userParam ? USER : USER, { 
-    variables: { username: userParam },
-  });
+  const { loading, data } = useQuery(USER)
 
   const user = data?.user || {};
-
-  if (Auth.loggedIn() && Auth.getProfile().authenticatedPerson.username === userParam) {
+console.log(data)
+  if (Auth.loggedIn()) {
     return <Navigate to="/profile" />;
   }
 
