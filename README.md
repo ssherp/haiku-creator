@@ -3,7 +3,7 @@
 ## Table of Contents
 
 * [Description](#description)
-* [Technologies Used](#technologiesused)
+* [Technology](#technologiesused)
 * [Installation](#installation)
 * [Models](#Models)
 * [Usage](#usage)
@@ -12,9 +12,14 @@
 * [License](#license)
 
 ## Description
+Your Gateway to Poetic Bliss! Unleash your inner poet with ease using our intuitive platform. Craft beautiful haikus effortlessly, guided by our user-friendly drag-n-drop interface. Dive into a world of syllabic harmony and nature-inspired verse. Let your creativity flourish with Haiku Helper. Start composing today!
+
+Poetry offers an escape, whether it be read from a book or written by ourself. At one point or another we have all been told to create our own poetry, and most have struggled due to the difficulty in deciding where to begin.
+
 Haiku Helper solves that problem by giving you a random set of words to help narrow down your focus and offers a fun drag and drop ability to finalize your masterpiece!
 
-[Example Video] **INSERT VIDEO HERE**
+### Application Demo 
+![GIF of Application](./assets/images/Haiku%20Helper%20GIF.gif)  
 
 ## Technology
 | Technology Used        | Resource URL         |
