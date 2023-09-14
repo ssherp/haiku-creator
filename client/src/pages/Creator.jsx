@@ -4,12 +4,13 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import SyllableContainer from '../components/HaikuMods/SyllableContainer';
 import DropContainer from '../components/HaikuMods/DropContainer';
 import unsplash from '../utils/unsplash';
-import Auth from "../utils/auth";
+import AuthService from '../utils/auth';
 import Nav from '../components/Nav';
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Words from '../components/Words';
 
 import { calculateSyllables } from '../components/HaikuMods/SyllableContainer';
+import SaveHaikuForm from '../components/HaikuMods/SaveHaikuForm';
 
 
 const initialWords = [
@@ -40,6 +41,13 @@ const initialWords = [
 ];
 
 const Creator = () => {
+
+  // const { index } = useParams();
+
+  // // Use 'index' to access the specific haiku to edit
+  // const haikuToEdit = savedHaikus[parseInt(index, 10)];
+
+
   const [selectedWords, setSelectedWords] = useState([]);
   const [lines, setLines] = useState({
     line1: [],
@@ -80,7 +88,6 @@ const Creator = () => {
   
     if (lineSyllables + syllables <= maxLineSyllables[targetLine]) {
       if (lines[targetLine].length < 5) {
-        // Add the word to the target line
         setLines((prevLines) => ({
           ...prevLines,
           [targetLine]: [...prevLines[targetLine], { word, syllables }],
@@ -95,7 +102,7 @@ const Creator = () => {
     } else {
       alert(`Adding '${word}' exceeds the syllable limit for Line ${targetLine}`);
     }
-    saveHaiku();
+    // handleHaikuSave(); // If we wanna have haiku save everytime use adds a word
   };
   
 
@@ -114,7 +121,6 @@ const updateSyllables = () => {
 
 
 const updateWordsInSyllableContainer = (containerName, updatedWords) => {
-  // Define a function to update words in the specified syllable container
   setSyllableContainerWords((prevSyllableContainerWords) => ({
     ...prevSyllableContainerWords,
     [containerName]: updatedWords,
@@ -139,20 +145,15 @@ const removeWordFromLine = (lineName, index) => {
         (totalSyllables, w) => totalSyllables + w.syllables,
         0
       );
-
       updateSyllableCountForLine(lineName, newSyllableCount);
-
       updateWordsInSyllableContainer(lineName, updatedLine);
-
       console.log(`Removed word: ${removedWord.word}`);
-      
-      // Call updateSyllables here with the newSyllableCount
       updateSyllables(newSyllableCount);
     }
   }
 };
 
-const saveHaiku = () => {
+const handleHaikuSave = () => {
   const haikuToSave = {
     line1: lines.line1.map((wordObj) => wordObj.word),
     line2: lines.line2.map((wordObj) => wordObj.word),
@@ -163,13 +164,18 @@ const saveHaiku = () => {
   const updatedSavedHaikus = [...existingSavedHaikus, haikuToSave];
 
   localStorage.setItem('savedHaikus', JSON.stringify(updatedSavedHaikus));
-}
-
-
   return (
-    <>
+    <div>
+      <SaveHaikuForm onSave={handleHaikuSave} />
+    </div>
+  );
+};
+
+
+return (
+  <>
     {
-      Auth.loggedIn() ? (
+      AuthService.loggedIn() ? (
         <>
     <DndProvider backend={HTML5Backend}>
       <div className="container">
@@ -217,7 +223,7 @@ const saveHaiku = () => {
             </DropContainer>
             <br />
             <a href="#">
-            <button className="creator" onClick={saveHaiku}>SAVE HAIKU</button>
+            <button className="creator" onClick={handleHaikuSave}>SAVE HAIKU</button>
           </a>
           </div>
           <div className="pure-u-1-3">
