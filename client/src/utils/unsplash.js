@@ -7,7 +7,7 @@ function unsplash() {
   
     var requestURL =
       "https://api.unsplash.com/photos/random?query=nature?orientation=landscape&client_id=" +
-      apiKey;
+      apiKey3;
       
 //       var photoUrl;
 //       fetch(requestURL)
