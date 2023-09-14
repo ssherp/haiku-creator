@@ -14,11 +14,11 @@ import Assemble from "../components/Assemble";
 const initialWords = [
   {
     category: '1 syllable',
-    words: ['Leaf', 'Stream', 'Sun', 'Tree', 'Sky'],
+    words: ['Leaves', 'Stream', 'Song', 'Wind', 'Light'],
   },
   {
     category: '2 syllables',
-    words: ['Meadow', 'Whisper', 'Pebble', 'Rainbow', 'Blossom'],
+    words: ['Meadow', 'Whispers', 'Pebble', 'Begins', 'Gentle'],
   },
   {
     category: '3 syllables',
@@ -26,15 +26,15 @@ const initialWords = [
   },
   {
     category: 'Verbs',
-    words: ['Whispers', 'Dances', 'Glistens', 'Sways', 'Blooms'],
+    words: ['Whispers', 'Dancing', 'Begins', 'Sway', 'Blooms'],
   },
   {
     category: 'Adjectives',
-    words: ['Gentle', 'Tranquil', 'Radiant', 'Fragrant', 'Serene'],
+    words: ['Golden', 'Tranquil', 'Radiant', 'Fragrant', 'Serene'],
   },
   {
     category: 'Prepositions',
-    words: ['of', 'in', 'for', 'over', 'on'],
+    words: ['of', 'in', 'for', 'the', 'on'],
   },
 ];
 

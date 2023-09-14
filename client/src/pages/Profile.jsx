@@ -23,7 +23,7 @@ const Profile = () => {
 
   // const { username: userParam } = useParams();
 
-//  // FOR TESTING PURPOSES PLEASE FORGIVE ME MY SIGNUP AND LOGIN DONT WORK YET GUYS 
+ // FOR TESTING PURPOSES PLEASE FORGIVE ME MY SIGNUP AND LOGIN DONT WORK YET GUYS 
 //  const mockUser = {
 //   username: "testuser",
 //   email: "testuser@example.com",
@@ -39,7 +39,8 @@ const Profile = () => {
 //   ],
 // };
 
-  // const user = mockUser;
+//   const user = mockUser;
+
 
   const { loading, data } = useQuery(USER)
 
