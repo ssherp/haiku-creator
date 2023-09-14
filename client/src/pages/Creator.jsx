@@ -4,11 +4,13 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import SyllableContainer from '../components/HaikuMods/SyllableContainer';
 import DropContainer from '../components/HaikuMods/DropContainer';
 import unsplash from '../utils/unsplash';
-import Auth from "../utils/auth";
+import AuthService from '../utils/auth';
 import Nav from '../components/Nav';
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Words from '../components/Words';
-import Assemble from "../components/Assemble";
+
+import { calculateSyllables } from '../components/HaikuMods/SyllableContainer';
+import SaveHaikuForm from '../components/HaikuMods/SaveHaikuForm';
 
 
 const initialWords = [
@@ -39,6 +41,13 @@ const initialWords = [
 ];
 
 const Creator = () => {
+
+  // const { index } = useParams();
+
+  // // Use 'index' to access the specific haiku to edit
+  // const haikuToEdit = savedHaikus[parseInt(index, 10)];
+
+
   const [selectedWords, setSelectedWords] = useState([]);
   const [lines, setLines] = useState({
     line1: [],
@@ -65,94 +74,163 @@ const Creator = () => {
       });
   }, []);
 
-
-  const handleWordSelect = (word, syllables) => {
+  const handleWordSelect = (word, syllables, targetLine) => {
     console.log(`Selected word: ${word}`);
     console.log(`Selected syllables: ${syllables}`);
-
-    if (lines.line1.reduce((totalSyllables, w) => totalSyllables + w.syllables, 0) < 5) {
-      if (
-        lines.line1.length < 5 &&
-        (lines.line1.length < 4 || lines.line1.reduce((totalSyllables, w) => totalSyllables + w.syllables, 0) + syllables <= 5)
-      ) {
+  
+    const maxLineSyllables = {
+      line1: 5,
+      line2: 7,
+      line3: 5,
+    };
+  
+    const lineSyllables = calculateSyllableCountForLine(syllableContainerWords[targetLine]);
+  
+    if (lineSyllables + syllables <= maxLineSyllables[targetLine]) {
+      if (lines[targetLine].length < 5) {
         setLines((prevLines) => ({
           ...prevLines,
-          line1: [...prevLines.line1, { word, syllables }],
+          [targetLine]: [...prevLines[targetLine], { word, syllables }],
         }));
         setSyllableContainerWords((prevSyllableContainerWords) => ({
           ...prevSyllableContainerWords,
-          line1: [...prevSyllableContainerWords.line1, word],
+          [targetLine]: [...prevSyllableContainerWords[targetLine], word],
         }));
       } else {
-        alert('Line 1 is full or exceeds the syllable limit');
-      }
-    } else if (lines.line2.reduce((totalSyllables, w) => totalSyllables + w.syllables, 0) < 7) {
-      if (
-        lines.line2.length < 7 &&
-        (lines.line2.length < 6 || lines.line2.reduce((totalSyllables, w) => totalSyllables + w.syllables, 0) + syllables <= 7)
-      ) {
-        setLines((prevLines) => ({
-          ...prevLines,
-          line2: [...prevLines.line2, { word, syllables }],
-        }));
-        setSyllableContainerWords((prevSyllableContainerWords) => ({
-          ...prevSyllableContainerWords,
-          line2: [...prevSyllableContainerWords.line2, word],
-        }));
-      } else {
-        alert('Line 2 is full or exceeds the syllable limit');
-      }
-    } else if (lines.line3.reduce((totalSyllables, w) => totalSyllables + w.syllables, 0) < 5) {
-      if (
-        lines.line3.length < 5 &&
-        (lines.line3.length < 4 || lines.line3.reduce((totalSyllables, w) => totalSyllables + w.syllables, 0) + syllables <= 5)
-      ) {
-        setLines((prevLines) => ({
-          ...prevLines,
-          line3: [...prevLines.line3, { word, syllables }],
-        }));
-        setSyllableContainerWords((prevSyllableContainerWords) => ({
-          ...prevSyllableContainerWords,
-          line3: [...prevSyllableContainerWords.line3, word],
-        }));
-      } else {
-        alert('Line 3 is full or exceeds the syllable limit');
+        alert(`Line ${targetLine} is full`);
       }
     } else {
-      alert('All lines are full');
+      alert(`Adding '${word}' exceeds the syllable limit for Line ${targetLine}`);
     }
-
-    console.log('Syllable Container Words:', syllableContainerWords);
+    // handleHaikuSave(); // If we wanna have haiku save everytime use adds a word
   };
+  
 
+const calculateSyllableCountForLine = (lineWords) => {
+  return lineWords.reduce(
+    (totalSyllables, word) => totalSyllables + calculateSyllables(word),
+    0
+  );
+};
+
+const updateSyllables = () => {
+  const newSyllableCount = lines.line1.reduce((totalSyllables, word) => totalSyllables + word.syllables, 0) +
+    lines.line2.reduce((totalSyllables, word) => totalSyllables + word.syllables, 0) +
+    lines.line3.reduce((totalSyllables, word) => totalSyllables + word.syllables, 0);
+};
+
+
+const updateWordsInSyllableContainer = (containerName, updatedWords) => {
+  setSyllableContainerWords((prevSyllableContainerWords) => ({
+    ...prevSyllableContainerWords,
+    [containerName]: updatedWords,
+  }));
+};
+const updateSyllableCountForLine = (lineName, syllableCount) => {
+  setLines((prevLines) => ({
+    ...prevLines,
+    [lineName]: syllableCount,
+  }));
+};
+
+const removeWordFromLine = (lineName, index) => {
+  // Ensure that the lineName is valid
+  if (lines.hasOwnProperty(lineName)) {
+    const updatedLine = [...lines[lineName]];
+    if (updatedLine.length > index) {
+      const removedWord = updatedLine.splice(index, 1)[0];
+      setLines({ ...lines, [lineName]: updatedLine });
+
+      const newSyllableCount = updatedLine.reduce(
+        (totalSyllables, w) => totalSyllables + w.syllables,
+        0
+      );
+      updateSyllableCountForLine(lineName, newSyllableCount);
+      updateWordsInSyllableContainer(lineName, updatedLine);
+      console.log(`Removed word: ${removedWord.word}`);
+      updateSyllables(newSyllableCount);
+    }
+  }
+};
+
+const handleHaikuSave = () => {
+  const haikuToSave = {
+    line1: lines.line1.map((wordObj) => wordObj.word),
+    line2: lines.line2.map((wordObj) => wordObj.word),
+    line3: lines.line3.map((wordObj) => wordObj.word),
+  };
+  const existingSavedHaikus = JSON.parse(localStorage.getItem('savedHaikus')) || [];
+
+  const updatedSavedHaikus = [...existingSavedHaikus, haikuToSave];
+
+  localStorage.setItem('savedHaikus', JSON.stringify(updatedSavedHaikus));
   return (
-    <>
+    <div>
+      <SaveHaikuForm onSave={handleHaikuSave} />
+    </div>
+  );
+};
+
+
+return (
+  <>
     {
-      Auth.loggedIn() ? (
+      AuthService.loggedIn() ? (
         <>
     <DndProvider backend={HTML5Backend}>
       <div className="container">
-          <Nav />
-          <main className="pure-g">
+        <Nav />
+        <main className="pure-g">
           <div className="pure-u-1-3">
-          <DropContainer onDrop={(item) => handleWordSelect(item.word, item.syllables)}>
-            <SyllableContainer title="Line 1 (5 syllables)" words={syllableContainerWords.line1} />
-          </DropContainer>
-          <DropContainer onDrop={(item) => handleWordSelect(item.word, item.syllables)}>
-            <SyllableContainer title="Line 2 (7 syllables)" words={syllableContainerWords.line2} />
-          </DropContainer>
-          <DropContainer onDrop={(item) => handleWordSelect(item.word, item.syllables)}>
-            <SyllableContainer title="Line 3 (5 syllables)" words={syllableContainerWords.line3} />
-          </DropContainer>
-          <br />
-          <a href="#"><span className="creator">SAVE HAIKU</span></a>
-
-        </div>
-        <div className="pure-u-1-3">
-          <Words words={initialWords} onWordSelect={handleWordSelect} />
-        </div>
-        <aside className="pure-u-1-3 unsplash" id="haikuPicture"></aside>
-      </main>
+            <DropContainer onDrop={(item) => handleWordSelect(item.word, item.syllables, "line1")}>
+              <SyllableContainer
+              title="Line 1 (5 syllables)"
+              words={syllableContainerWords.line1}
+              updateWords={(updatedWords) =>
+                updateWordsInSyllableContainer("line1", updatedWords)
+              }
+              updateSyllables={updateSyllables}
+            />
+            <div>
+              Syllable Count: {calculateSyllableCountForLine(syllableContainerWords.line1)}
+            </div>
+            </DropContainer>
+            <DropContainer onDrop={(item) => handleWordSelect(item.word, item.syllables, "line2")}>
+              <SyllableContainer
+              title="Line 2 (7 syllables)"
+              words={syllableContainerWords.line2}
+              updateWords={(updatedWords) =>
+                updateWordsInSyllableContainer("line2", updatedWords)
+              }
+              updateSyllables={updateSyllables}
+            />
+            <div>
+              Syllable Count: {calculateSyllableCountForLine(syllableContainerWords.line2, )}
+            </div>
+            </DropContainer>
+            <DropContainer onDrop={(item) => handleWordSelect(item.word, item.syllables, "line3")}>
+              <SyllableContainer
+              title="Line 3 (5 syllables)"
+              words={syllableContainerWords.line3}
+              updateWords={(updatedWords) =>
+                updateWordsInSyllableContainer("line3", updatedWords)
+              }
+              updateSyllables={updateSyllables}
+            />
+            <div>
+              Syllable Count: {calculateSyllableCountForLine(syllableContainerWords.line3)}
+            </div>
+            </DropContainer>
+            <br />
+            <a href="#">
+            <button className="creator" onClick={handleHaikuSave}>SAVE HAIKU</button>
+          </a>
+          </div>
+          <div className="pure-u-1-3">
+            <Words words={initialWords} onWordSelect={handleWordSelect} />
+          </div>
+          <aside className="pure-u-1-3 unsplash" id="haikuPicture"></aside>
+        </main>
       </div>
     </DndProvider>
         </>
