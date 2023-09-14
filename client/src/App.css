@@ -19,14 +19,16 @@ body {
   background: radial-gradient(circle, rgba(255,255,255,1) 29%, rgba(238,240,237,1) 69%, rgba(223,223,223,1) 100%);
 }
   /* wrapping container styles */
+footer,  
 .container {
     display:block;
     width: 80%;
-    margin:40px auto;
+    margin:5px auto;
 }
 
 /* begin header styles */
 header {
+  margin-top:40px;
   border-top:2px solid black;
   border-bottom:2px solid black
 }
@@ -73,6 +75,12 @@ main {
   color:white;
   background: rgb(0,0,0);
   background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.7469581582633054) 51%, rgba(255,255,255,1) 74%);
+}
+footer {
+  color:slategrey;
+}
+.footer {
+  text-align: right;
 }
   /* end main content styles */
 
