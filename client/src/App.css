@@ -100,6 +100,14 @@ footer {
   background-blend-mode: multiply; */
 }
 
+a.notLoggedIn {
+  color:white;
+  text-align: center;
+  padding:20px;
+  display:block;
+  background-color:black;
+}
+
 /* LOGIN PAGE */
 
 /* NOTE: form button styles shared with creator class above */
