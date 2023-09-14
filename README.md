@@ -72,6 +72,7 @@ For any issues, or suggestions, please reach out to our customer service team at
 
  - Email: customerservice@haikuhelper.com
  - Github: https://github.com/ssherp/haiku-creator/
+ - Deployed Application: https://haiku-helper-428f5c7f1218.herokuapp.com/
 
 ## License
 There is no license associated with this application. 
