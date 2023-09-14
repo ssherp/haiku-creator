@@ -222,9 +222,9 @@ return (
             </div>
             </DropContainer>
             <br />
-            <a href="#">
+            <Link to={`/results`}>
             <button className="creator" onClick={handleHaikuSave}>SAVE HAIKU</button>
-          </a>
+          </Link>
           </div>
           <div className="pure-u-1-3">
             <Words words={initialWords} onWordSelect={handleWordSelect} />
