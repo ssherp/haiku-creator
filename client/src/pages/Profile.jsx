@@ -14,31 +14,9 @@ import Cards from "../components/Cards";
 const Profile = () => {
   const {loading, error, data} = useQuery(USER)
   const { userInfo } = data || {}
-  const [userFormData, setUserFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-  })
 
-  const [addUser] = useMutation(ADD_USER);
   const [unsplashDataLoaded] = useState(false);
   useEffect(() => {
-    const handleInputChange = (event) => {
-      const {name, value} = event.target;
-      setUserFormData({...userFormData, [name]:value})
-    }
-    const handleFormSubmit = async (event) => {
-      event.preventDefault();
-      const form = event.currentTarget;
-      try {
-        const {data} = await addUser ({
-          variables: {...userFormData}
-        })
-        Auth.login(data.addUser.token)
-      } catch (err) {
-        console.log(err)
-      }
-    }
 
     unsplash()
       .then(() => {
