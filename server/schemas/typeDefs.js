@@ -5,7 +5,8 @@ type User {
     email: String
     haikus: [Haiku]
 }
- type getHaikus {
+ type Haiku {
+_id: ID
 line1: String
 line2: String
 line3: String
@@ -18,6 +19,7 @@ createdAt: String
 }
 type Query {
     user:User
+    getHaikus:[Haiku]
 }
 
 type Mutation {
