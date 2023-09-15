@@ -8,6 +8,13 @@ const resolvers = {
         }
         throw AuthenticationError;
       },
+      getHaikus: async (parent, args, context) => {
+        if (context.user) {
+          // Assuming your User schema has a field 'savedHaikus'
+          return (await User.findOne({ _id: context.user._id })).savedHaikus;
+        }
+        throw AuthenticationError;
+      },
     },
     Mutation: {
         addUser: async (parent, { username, email, password }) => {

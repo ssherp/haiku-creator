@@ -47,7 +47,7 @@ const Creator = () => {
 
   // // Use 'index' to access the specific haiku to edit
   // const haikuToEdit = savedHaikus[parseInt(index, 10)];
-const[SaveHaiku]=useMutation(SAVE_HIAKU)
+const[SaveHaiku]=useMutation(SAVE_HaiKU)
 
   const [selectedWords, setSelectedWords] = useState([]);
   const [lines, setLines] = useState({

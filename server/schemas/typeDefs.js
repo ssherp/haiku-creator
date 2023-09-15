@@ -5,12 +5,11 @@ type User {
     email: String
     haikus: [Haiku]
 }
- type Haiku {
+ type getHaikus {
 line1: String
 line2: String
 line3: String
 createdAt: String
- image: String
 }
 
  type Auth {
