@@ -1,3 +1,3 @@
 const User = require('./User');
-
-module.exports = {User};
+const Haiku= require('./Haiku')
+module.exports = {User,Haiku};

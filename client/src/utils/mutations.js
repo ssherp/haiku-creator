@@ -23,21 +23,15 @@ mutation Mutation($username: String!, $password: String!) {
 
 `;
 
-export const SAVE_HIAKU=gql`
-mutation SaveHaiku($haikuText: String, $createdAt: String, $image: String) {
-  saveHaiku(haikuText: $haikuText, createdAt: $createdAt, image: $image) {
-    email
+export const SAVE_HAIKU=gql`
+mutation SaveHaiku($line1: String, $line2: String, $line3: String, $createdAt: String) {
+  saveHaiku(line1: $line1, line2: $line2, line3: $line3, createdAt: $createdAt) {
     username
-    haikus {
-      createdAt
-      haikuText
-      image
-    }
   }
 }
 `;
 
-export const REMOVE_HIAKU=gql`
+export const REMOVE_HAIKU=gql`
 mutation RemoveHaiku($id: ID!) {
   removeHaiku(_id: $id) {
     email

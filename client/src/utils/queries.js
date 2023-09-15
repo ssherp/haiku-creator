@@ -6,9 +6,11 @@ query User {
     _id
     email
     haikus {
+      line1
+      line2
+      line3
       createdAt
-      haikuText
-      image
+      
     }
     username
   }

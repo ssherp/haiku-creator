@@ -8,11 +8,10 @@ import AuthService from '../utils/auth';
 import Nav from '../components/Nav';
 import { Link, useParams } from "react-router-dom";
 import Words from '../components/Words';
-
+import { useMutation } from '@apollo/client';
+import { SAVE_HAIKU } from '../utils/mutations';
 import { calculateSyllables } from '../components/HaikuMods/SyllableContainer';
-import SaveHaikuForm from '../components/HaikuMods/SaveHaikuForm';
-
-
+import SaveHaikuForm from '../components/HaikuMods/SaveHaikuForm'; // For local storage
 const initialWords = [
   {
     category: '1 syllable',
@@ -39,30 +38,22 @@ const initialWords = [
     words: ['of', 'in', 'for', 'the', 'on'],
   },
 ];
-
 const Creator = () => {
-
   // const { index } = useParams();
-
   // // Use 'index' to access the specific haiku to edit
   // const haikuToEdit = savedHaikus[parseInt(index, 10)];
-
-
   const [selectedWords, setSelectedWords] = useState([]);
   const [lines, setLines] = useState({
     line1: [],
     line2: [],
     line3: [],
   });
-
-
   // Add state variables for each syllable container
   const [syllableContainerWords, setSyllableContainerWords] = useState({
     line1: [],
     line2: [],
     line3: [],
   })
-
   const [unsplashDataLoaded] = useState(false);
   useEffect(() => {
     unsplash()
@@ -73,19 +64,15 @@ const Creator = () => {
         console.error('Error loading unsplash data:', error);
       });
   }, []);
-
   const handleWordSelect = (word, syllables, targetLine) => {
     console.log(`Selected word: ${word}`);
     console.log(`Selected syllables: ${syllables}`);
-  
     const maxLineSyllables = {
       line1: 5,
       line2: 7,
       line3: 5,
     };
-  
     const lineSyllables = calculateSyllableCountForLine(syllableContainerWords[targetLine]);
-  
     if (lineSyllables + syllables <= maxLineSyllables[targetLine]) {
       if (lines[targetLine].length < 5) {
         setLines((prevLines) => ({
@@ -104,22 +91,17 @@ const Creator = () => {
     }
     // handleHaikuSave(); // If we wanna have haiku save everytime use adds a word
   };
-  
-
 const calculateSyllableCountForLine = (lineWords) => {
   return lineWords.reduce(
     (totalSyllables, word) => totalSyllables + calculateSyllables(word),
     0
   );
 };
-
 const updateSyllables = () => {
   const newSyllableCount = lines.line1.reduce((totalSyllables, word) => totalSyllables + word.syllables, 0) +
     lines.line2.reduce((totalSyllables, word) => totalSyllables + word.syllables, 0) +
     lines.line3.reduce((totalSyllables, word) => totalSyllables + word.syllables, 0);
 };
-
-
 const updateWordsInSyllableContainer = (containerName, updatedWords) => {
   setSyllableContainerWords((prevSyllableContainerWords) => ({
     ...prevSyllableContainerWords,
@@ -132,7 +114,6 @@ const updateSyllableCountForLine = (lineName, syllableCount) => {
     [lineName]: syllableCount,
   }));
 };
-
 const removeWordFromLine = (lineName, index) => {
   // Ensure that the lineName is valid
   if (lines.hasOwnProperty(lineName)) {
@@ -140,7 +121,6 @@ const removeWordFromLine = (lineName, index) => {
     if (updatedLine.length > index) {
       const removedWord = updatedLine.splice(index, 1)[0];
       setLines({ ...lines, [lineName]: updatedLine });
-
       const newSyllableCount = updatedLine.reduce(
         (totalSyllables, w) => totalSyllables + w.syllables,
         0
@@ -152,26 +132,39 @@ const removeWordFromLine = (lineName, index) => {
     }
   }
 };
-
-const handleHaikuSave = () => {
-  const haikuToSave = {
-    line1: lines.line1.map((wordObj) => wordObj.word),
-    line2: lines.line2.map((wordObj) => wordObj.word),
-    line3: lines.line3.map((wordObj) => wordObj.word),
+const [saveHaiku] = useMutation(SAVE_HAIKU);
+  const handleSaveHaiku = async (haikuData) => {
+    try {
+      const { data } = await saveHaiku({
+        variables: { haikuData }, // Pass the haiku data here as an object
+      });
+      console.log('Haiku saved successfully:', data);
+      // Optionally, you can update your component's state to reflect the saved haiku.
+    } catch (error) {
+      console.error('Error saving haiku:', error);
+    }
   };
-  const existingSavedHaikus = JSON.parse(localStorage.getItem('savedHaikus')) || [];
-
-  const updatedSavedHaikus = [...existingSavedHaikus, haikuToSave];
-
-  localStorage.setItem('savedHaikus', JSON.stringify(updatedSavedHaikus));
-  return (
-    <div>
-      <SaveHaikuForm onSave={handleHaikuSave} />
-    </div>
-  );
-};
-
-
+  const handleHaikuSave = () => {
+    // Prepare the haiku data in the expected format for the mutation
+    const haikuToSave = {
+      haikuData: {
+        line1: lines.line1.map((wordObj) => wordObj.word),
+        line2: lines.line2.map((wordObj) => wordObj.word),
+        line3: lines.line3.map((wordObj) => wordObj.word),
+      },
+    };
+    // Call the handleSaveHaiku function with the prepared haiku data
+    handleSaveHaiku(haikuToSave);
+  };
+  // const existingSavedHaikus = JSON.parse(localStorage.getItem('savedHaikus')) || [];
+  // const updatedSavedHaikus = [...existingSavedHaikus, haikuToSave];
+  // localStorage.setItem('savedHaikus', JSON.stringify(updatedSavedHaikus));
+  // return (
+  //   <div>
+  //     <SaveHaikuForm onSave={handleHaikuSave} />
+  //   </div>
+  // );
+// };
 return (
   <>
     {
@@ -180,9 +173,8 @@ return (
     <DndProvider backend={HTML5Backend}>
       <div className="container">
         <Nav />
-        <aside className="unsplash" id="haikuPicture"></aside>
         <main className="pure-g">
-          <div className="pure-u-1-2">
+          <div className="pure-u-1-3">
             <DropContainer onDrop={(item) => handleWordSelect(item.word, item.syllables, "line1")}>
               <SyllableContainer
               title="Line 1 (5 syllables)"
@@ -224,15 +216,14 @@ return (
             </DropContainer>
             <br />
             <Link to={`/results`}>
-            <button className="creator" onClick={handleHaikuSave}>SAVE HAIKU</button>
-          </Link>
-          <br />
+              <button className="creator" onClick={handleHaikuSave}>SAVE HAIKU</button>
+            </Link>
           </div>
-          <div className="pure-u-1-2">
+          <div className="pure-u-1-3">
             <Words words={initialWords} onWordSelect={handleWordSelect} />
           </div>
+          <aside className="pure-u-1-3 unsplash" id="haikuPicture"></aside>
         </main>
-  
       </div>
     </DndProvider>
         </>
@@ -250,5 +241,4 @@ return (
     </>
   );
 };
-
 export default Creator;

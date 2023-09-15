@@ -6,9 +6,12 @@ type User {
     haikus: [Haiku]
 }
  type Haiku {
-haikuText: String
+_id: ID
+line1: String
+line2: String
+line3: String
 createdAt: String
- image: String}
+}
 
  type Auth {
     token: ID
@@ -16,12 +19,13 @@ createdAt: String
 }
 type Query {
     user:User
+    getHaikus:[Haiku]
 }
 
 type Mutation {
         addUser(username: String!, email: String!, password: String!): Auth
         login(username: String!, password: String!): Auth
-        saveHaiku(haikuText:String,createdAt:String,image:String): User
+        saveHaiku(line1: String,line2: String,line3: String,createdAt:String): User
         removeHaiku(_id:ID!):User
       }   
 `;
