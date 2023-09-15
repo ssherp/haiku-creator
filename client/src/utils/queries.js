@@ -8,7 +8,6 @@ query User {
     haikus {
       createdAt
       haikuText
-      image
     }
     username
   }

@@ -24,15 +24,9 @@ mutation Mutation($username: String!, $password: String!) {
 `;
 
 export const SAVE_HIAKU=gql`
-mutation SaveHaiku($haikuText: String, $createdAt: String, $image: String) {
-  saveHaiku(haikuText: $haikuText, createdAt: $createdAt, image: $image) {
-    email
+mutation SaveHaiku($line1: String, $line2: String, $line3: String, $createdAt: String, $image: String) {
+  saveHaiku(line1: $line1, line2: $line2, line3: $line3, createdAt: $createdAt) {
     username
-    haikus {
-      createdAt
-      haikuText
-      image
-    }
   }
 }
 `;

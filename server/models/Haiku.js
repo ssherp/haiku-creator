@@ -1,9 +1,18 @@
 const { Schema, model } = require('mongoose');
 
-const { Schema } = mongoose;
 
 const haikuSchema = new Schema({
-  haikuText: {
+  line1: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  line2: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  line3: {
     type: String,
     required: true,
     trim: true
@@ -12,9 +21,6 @@ const haikuSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  image: {
-    type: String
-  }
 });
 
 const Haiku =model('Haiku', haikuSchema);

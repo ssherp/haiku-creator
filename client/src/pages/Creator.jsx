@@ -8,7 +8,8 @@ import AuthService from '../utils/auth';
 import Nav from '../components/Nav';
 import { Link, useParams } from "react-router-dom";
 import Words from '../components/Words';
-
+import { useMutation } from '@apollo/client';
+import { SAVE_HIAKU } from '../utils/mutations';
 import { calculateSyllables } from '../components/HaikuMods/SyllableContainer';
 import SaveHaikuForm from '../components/HaikuMods/SaveHaikuForm';
 
@@ -46,7 +47,7 @@ const Creator = () => {
 
   // // Use 'index' to access the specific haiku to edit
   // const haikuToEdit = savedHaikus[parseInt(index, 10)];
-
+const[SaveHaiku]=useMutation(SAVE_HIAKU)
 
   const [selectedWords, setSelectedWords] = useState([]);
   const [lines, setLines] = useState({
@@ -153,12 +154,16 @@ const removeWordFromLine = (lineName, index) => {
   }
 };
 
-const handleHaikuSave = () => {
+const handleHaikuSave = async () => {
   const haikuToSave = {
     line1: lines.line1.map((wordObj) => wordObj.word),
     line2: lines.line2.map((wordObj) => wordObj.word),
     line3: lines.line3.map((wordObj) => wordObj.word),
+    createdAt:Date.now().toLocaleDateString()
   };
+await SaveHaiku ({
+  variables:haikuToSave
+})
   const existingSavedHaikus = JSON.parse(localStorage.getItem('savedHaikus')) || [];
 
   const updatedSavedHaikus = [...existingSavedHaikus, haikuToSave];

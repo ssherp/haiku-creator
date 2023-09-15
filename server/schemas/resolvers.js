@@ -1,4 +1,4 @@
-const {User} = require('../models');
+const {User, Haiku} = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 const resolvers = {
     Query: {
@@ -33,19 +33,26 @@ const resolvers = {
           return { token, user };
         },
 
-        saveHaiku: async (parent, { haikuText,createdAt,image}, context) => {
+        saveHaiku: async (parent, {line1,line2,line3,createdAt}, context) => {
             if (context.user) {
-              return await User.findOneAndUpdate(
-                { _id: context.user._id },
-                {
-                  $addToSet: { savedHaikus: {haikuText,createdAt,image} },
-                },
-                {
-                  new: true,
-                  runValidators: true,
-                }
+              const haiku = await Haiku.create({line1,line2,line3,createdAt});
+              const user = await User.findOneAndUpdate(
+                { _id:context.user._id },
+                { $addToSet: { haikus: haiku._id } },
+                { new: true }
               );
-            }
+              return user
+            //   return await User.findOneAndUpdate(
+            //     { _id: context.user._id },
+            //     {
+            //       $set:{line1,line2,line3,createdAt},
+            //     },
+            //     {
+            //       new: true,
+            //       runValidators: true,
+            //     }
+            //   );
+          }
             throw AuthenticationError;
           },
 

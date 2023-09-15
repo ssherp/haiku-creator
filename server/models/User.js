@@ -22,7 +22,7 @@ const userSchema = new Schema({
   haikus: [{
     type: Schema.Types.ObjectId,
      ref: 'Haiku',
-     required: true}]
+  }]
 });
 
 userSchema.pre('save', async function (next) {
