@@ -180,8 +180,9 @@ return (
     <DndProvider backend={HTML5Backend}>
       <div className="container">
         <Nav />
+        <aside className="unsplash" id="haikuPicture"></aside>
         <main className="pure-g">
-          <div className="pure-u-1-3">
+          <div className="pure-u-1-2">
             <DropContainer onDrop={(item) => handleWordSelect(item.word, item.syllables, "line1")}>
               <SyllableContainer
               title="Line 1 (5 syllables)"
@@ -225,12 +226,13 @@ return (
             <Link to={`/results`}>
             <button className="creator" onClick={handleHaikuSave}>SAVE HAIKU</button>
           </Link>
+          <br />
           </div>
-          <div className="pure-u-1-3">
+          <div className="pure-u-1-2">
             <Words words={initialWords} onWordSelect={handleWordSelect} />
           </div>
-          <aside className="pure-u-1-3 unsplash" id="haikuPicture"></aside>
         </main>
+  
       </div>
     </DndProvider>
         </>

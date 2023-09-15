@@ -26,7 +26,7 @@ const Profile = () => {
       <Nav />
       <main className="pure-g">
       <Cards />
-      <div className="pure-u-1-3">
+      {/*<div className="pure-u-1-3">
           <div className="user-profile">
             <h2>User Profile</h2>
             <p>
@@ -34,18 +34,17 @@ const Profile = () => {
               {console.log(USER)}
             </p>
             <p>
-              {/* Email: {userInfo.email} */}
+               Email: {userInfo.email} 
             </p>
-          </div>
-          {/* <div className="user-haikus">
+          </div> <div className="user-haikus">
             <h2> User's Haikus </h2>
             <ul>
               {user.haikus.map((haiku) => (
                 <li key={haiku._id}>{haiku.content}</li>
               ))}
             </ul>
-          </div>       */}
-      </div>
+          </div>       
+      </div>*/}
     </main>
       <aside className="unsplash" id="haikuPicture"></aside>
     </div>

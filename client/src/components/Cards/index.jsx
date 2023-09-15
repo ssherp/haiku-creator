@@ -41,7 +41,7 @@ function HaikuSection( ) {
   }, []);
 
   return (
-    <ul className="pure-u-2-3 cardDeck">
+    <ul className="pure-u-1 cardDeck">
       {savedHaikus.map((haiku, index) => (
         // <Link to={`/creator/${index}`} key={index}>
         <Link to={`/results`} key={index}>

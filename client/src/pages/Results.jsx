@@ -27,7 +27,7 @@ useEffect(() => {
     <div className="container">
       <Nav />
       <main className="pure-g">
-        <div className="pure-u-2-3">
+        <div className="pure-u-1">
           {savedHaikus.length > 0 ? (
             <Link to={`/creator`} key={savedHaikus.length - 1}>
               <p className="haiku">
@@ -40,11 +40,11 @@ useEffect(() => {
             <p>No saved haikus available.</p>
           )}
         </div>
-        <div className="pure-u-1-3">
+       {/* <div className="pure-u-1-3">
           <p>
             <b>Haiku Helper:</b> Your Gateway to Poetic Bliss! Unleash your inner poet with ease using our intuitive platform. Craft beautiful haikus effortlessly, guided by our user-friendly drag-n-drop interface. Dive into a world of syllabic harmony and nature-inspired verse. Let your creativity flourish with <b>Haiku Helper</b>! Start composing today.
           </p>
-        </div>
+          </div> */}
       </main>
       <aside className="unsplash" id="haikuPicture"></aside>
     </div>
